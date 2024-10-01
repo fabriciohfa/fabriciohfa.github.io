@@ -54,12 +54,15 @@ function setLanguage(language) {
             return response.text();
         })
         .then(xmlText => {
+            console.log("Conteúdo bruto do XML:", xmlText); // Loga o conteúdo bruto do XML
+            
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "application/xml");
 
             // Verifica se há erro no parsing do XML
             if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
-                throw new Error("Erro ao fazer parse do XML.");
+                console.error("Erro ao fazer parse do XML:", xmlDoc.getElementsByTagName('parsererror')[0].textContent);
+                return;
             }
 
             applyTranslations(xmlDoc);
@@ -68,6 +71,7 @@ function setLanguage(language) {
             console.error("Erro:", error);
         });
 }
+
 
 // Função para aplicar as traduções
 function applyTranslations(xmlDoc) {
