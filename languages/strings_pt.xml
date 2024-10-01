@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="title">Olá, sou Fabrício</string>
-    <string name="description">Desenvolvedor Full Stack &amp Criador de Experiências Interativas</string>
+    <string name="description">Desenvolvedor Full Stack &amp; Criador de Experiências Interativas</string>
     <string name="button_explore">Explorar</string>
     <string name="about_title">Sobre Mim</string>
     <string name="about_description">Sou um desenvolvedor apaixonado por criar experiências imersivas, combinando design moderno com código eficiente. Veja abaixo alguns dos meus projetos mais recentes.</string>
