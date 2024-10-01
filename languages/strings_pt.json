@@ -1,11 +1,11 @@
 {
     "title": "Olá, sou Fabrício",
-    "description": "Desenvolvedor Full Stack & Criador de Experiências Interativas",
+    "description": "Desenvolvedor Full Stack & Desenvoldedor de Jogos",
     "button_explore": "Explorar",
     "about_title": "Sobre Mim",
-    "about_description": "Sou um desenvolvedor apaixonado por criar experiências imersivas, combinando design moderno com código eficiente.",
+    "about_description": "Sou um desenvolvedor apaixonado por criar experiências imersivas, combinando design moderno com código eficiente. Conheça meus projetos e experiências a seguir",
     "projects_title": "Projetos Recentes",
     "contact_title": "Contato",
     "contact_description": "Gostaria de colaborar ou discutir uma ideia? Me envie uma mensagem!",
-    "button_contact": "Enviar Email"
+    "button_contact": "Fale comigo"
 }
