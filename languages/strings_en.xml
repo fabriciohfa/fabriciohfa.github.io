@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
     <string name="title">Hello, I'm Fabrício</string>
-    <string name="description">Full Stack Developer & Creator of Interactive Experiences</string>
+    <string name="description">Full Stack Developer &amp Creator of Interactive Experiences</string>
     <string name="button_explore">Explore</string>
     <string name="about_title">About Me</string>
     <string name="about_description">I am a developer passionate about creating immersive experiences, combining modern design with efficient code. Below are some of my recent projects.</string>
