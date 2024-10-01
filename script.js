@@ -43,26 +43,24 @@ window.addEventListener('scroll', revealOnScroll);
 // Chama a função no início
 revealOnScroll();
 
-// Função para carregar e aplicar as traduções
+// Função para carregar e aplicar as traduções usando fetch
 function setLanguage(language) {
-    const xhr = new XMLHttpRequest();
-    
-    // Define o caminho para os arquivos XML, ajustando conforme necessário
-    xhr.open('GET', `languages/strings_${language}.xml`, true);
-    
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                console.log(`Arquivo de tradução (${language}) carregado com sucesso.`);
-                const xmlDoc = xhr.responseXML;
-                applyTranslations(xmlDoc);
-            } else {
-                console.error(`Erro ao carregar o arquivo XML para o idioma ${language}.`);
+    // Define o caminho para os arquivos XML
+    fetch(`languages/strings_${language}.xml`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Erro ao carregar o arquivo de tradução: ${response.statusText}`);
             }
-        }
-    };
-    
-    xhr.send();
+            return response.text();
+        })
+        .then(xmlText => {
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+            applyTranslations(xmlDoc);
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+        });
 }
 
 // Função para aplicar as traduções
