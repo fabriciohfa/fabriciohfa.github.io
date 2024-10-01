@@ -45,15 +45,16 @@ revealOnScroll();
 
 // Função para carregar e aplicar as traduções usando fetch
 function setLanguage(language) {
-    // Define o caminho para os arquivos XML
     fetch(`languages/strings_${language}.xml`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro ao carregar o arquivo de tradução: ${response.statusText}`);
             }
+            console.log(`Arquivo de tradução ${language} carregado com sucesso.`);
             return response.text();
         })
         .then(xmlText => {
+            console.log("Conteúdo do XML:", xmlText);  // Loga o conteúdo do XML carregado
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "application/xml");
             applyTranslations(xmlDoc);
@@ -74,6 +75,7 @@ function applyTranslations(xmlDoc) {
 
         if (element) {
             element.innerHTML = value;
+            console.log(`ID: ${id}, Valor aplicado: ${value}`);  // Loga o ID e valor aplicado
         } else {
             console.warn(`Elemento com o ID "${id}" não encontrado no HTML.`);
         }
