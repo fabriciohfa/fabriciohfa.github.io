@@ -4,7 +4,7 @@
     <!-- Metadados -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Seu Nome] | Portfólio Interativo</title>
+    <title>Fabrício | Portfólio Interativo</title>
     
     <!-- Fonte personalizada -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
@@ -13,24 +13,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="language-selector">
+        <button onclick="setLanguage('pt')">Português</button>
+        <button onclick="setLanguage('en')">English</button>
+    </div>
     <div class="vanta-bg">
         <div class="hero-section">
             <!-- O efeito de fumaça será aplicado a .vanta-bg -->
             <div class="intro">
 		<img src="images/foto.jpg" alt="Foto de Fabrício" class="profile-pic">
-                <h1>Olá, sou <span>Fabrício</span></h1>
-                <p>Desenvolvedor Full Stack & Criador de Experiências Interativas</p>
-                <button class="explore-button" onclick="scrollToSection('about')">Explorar</button>
+                <h1 id="title"></span></h1>
+                <p id="description"></p>
+                <button id="button_explore" class="explore-button" onclick="scrollToSection('about')"></button>
             </div>
         </div>
 
         <section id="about" class="section-content reveal">
-            <h2>Sobre Mim</h2>
-            <p>Sou um desenvolvedor apaixonado por criar experiências imersivas, combinando design moderno com código eficiente. Veja abaixo alguns dos meus projetos mais recentes.</p>
+            <h2 id="about_title"></h2>
+            <p id="about_description"></p>
         </section>
 
         <section id="projects" class="section-content reveal">
-            <h2>Projetos Recentes</h2>
+            <h2 id="projects_title"></h2>
             <div class="project-cards">
                 <div class="project-card reveal">
                     <h3>Projeto 1</h3>
@@ -42,19 +46,18 @@
                     <p>Descrição do Projeto 2.</p>
                     <a href="https://github.com/seu-usuario/projeto2">Ver Projeto</a>
                 </div>
-                <!-- Adicione mais projetos conforme necessário -->
+
             </div>
         </section>
 
         <section id="contact" class="section-content reveal">
-            <h2>Contato</h2>
-            <p>Gostaria de colaborar ou discutir uma ideia? Me envie uma mensagem!</p>
-            <a href="mailto:email@exemplo.com" class="contact-button">Fale comigo</a>
+            <h2 id="contact_title"></h2>
+            <p id="contact_description"></p>
+            <a id="button_contact" href="mailto:email@exemplo.com" class="contact-button"></a>
         </section>
     </div>
 
     <!-- Scripts -->
-    <!-- Three.js é necessário para o Vanta.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <!-- Vanta.js para o efeito de fumaça -->
     <script src="https://cdn.jsdelivr.net/npm/vanta/dist/vanta.fog.min.js"></script>

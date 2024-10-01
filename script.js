@@ -42,3 +42,35 @@ window.addEventListener('scroll', revealOnScroll);
 
 // Chama a função no início
 revealOnScroll();
+
+function setLanguage(language) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', `strings_${language}.xml`, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            const xmlDoc = xhr.responseXML;
+            applyTranslations(xmlDoc);
+        }
+    };
+    xhr.send();
+}
+
+// Função para aplicar as traduções
+function applyTranslations(xmlDoc) {
+    const strings = xmlDoc.getElementsByTagName('string');
+
+    for (let i = 0; i < strings.length; i++) {
+        const id = strings[i].getAttribute('name');
+        const value = strings[i].textContent;
+        const element = document.getElementById(id);
+
+        if (element) {
+            element.innerHTML = value;
+        }
+    }
+}
+
+// Carrega o idioma padrão ao abrir a página
+window.onload = function() {
+    setLanguage('pt'); // Definir o português como idioma padrão
+};
