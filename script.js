@@ -45,51 +45,25 @@ revealOnScroll();
 
 // Função para carregar e aplicar as traduções usando fetch
 function setLanguage(language) {
-    fetch(`languages/strings_${language}.xml`)
+    fetch(`languages/strings_${language}.json`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`Erro ao carregar o arquivo de tradução: ${response.statusText}`);
             }
-            console.log(`Arquivo de tradução (${language}) carregado com sucesso.`);
-            return response.text();
+            return response.json();  // Parse como JSON
         })
-        .then(xmlText => {
-            console.log("Conteúdo bruto do XML:", xmlText); // Loga o conteúdo bruto do XML
-            
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlText, "application/xml");
-
-            // Verifica se há erro no parsing do XML
-            if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
-                console.error("Erro ao fazer parse do XML:", xmlDoc.getElementsByTagName('parsererror')[0].textContent);
-                return;
-            }
-
-            applyTranslations(xmlDoc);
+        .then(strings => {
+            applyTranslations(strings);
         })
         .catch(error => {
             console.error("Erro:", error);
         });
 }
 
-
-// Função para aplicar as traduções
-function applyTranslations(xmlDoc) {
-    if (!xmlDoc) {
-        console.error("Documento XML inválido.");
-        return;
-    }
-
-    const strings = xmlDoc.getElementsByTagName('string');
-
-    if (strings.length === 0) {
-        console.error("Nenhuma string encontrada no XML.");
-        return;
-    }
-
-    for (let i = 0; i < strings.length; i++) {
-        const id = strings[i].getAttribute('name');
-        const value = strings[i].textContent;
+// Função para aplicar as traduções usando JSON
+function applyTranslations(strings) {
+    for (const id in strings) {
+        const value = strings[id];
         const element = document.getElementById(id);
 
         if (element) {
