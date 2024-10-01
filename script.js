@@ -50,13 +50,18 @@ function setLanguage(language) {
             if (!response.ok) {
                 throw new Error(`Erro ao carregar o arquivo de tradução: ${response.statusText}`);
             }
-            console.log(`Arquivo de tradução ${language} carregado com sucesso.`);
+            console.log(`Arquivo de tradução (${language}) carregado com sucesso.`);
             return response.text();
         })
         .then(xmlText => {
-            console.log("Conteúdo do XML:", xmlText);  // Loga o conteúdo do XML carregado
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlText, "application/xml");
+
+            // Verifica se há erro no parsing do XML
+            if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
+                throw new Error("Erro ao fazer parse do XML.");
+            }
+
             applyTranslations(xmlDoc);
         })
         .catch(error => {
@@ -66,7 +71,17 @@ function setLanguage(language) {
 
 // Função para aplicar as traduções
 function applyTranslations(xmlDoc) {
+    if (!xmlDoc) {
+        console.error("Documento XML inválido.");
+        return;
+    }
+
     const strings = xmlDoc.getElementsByTagName('string');
+
+    if (strings.length === 0) {
+        console.error("Nenhuma string encontrada no XML.");
+        return;
+    }
 
     for (let i = 0; i < strings.length; i++) {
         const id = strings[i].getAttribute('name');
@@ -75,7 +90,7 @@ function applyTranslations(xmlDoc) {
 
         if (element) {
             element.innerHTML = value;
-            console.log(`ID: ${id}, Valor aplicado: ${value}`);  // Loga o ID e valor aplicado
+            console.log(`ID: ${id}, Valor aplicado: ${value}`);
         } else {
             console.warn(`Elemento com o ID "${id}" não encontrado no HTML.`);
         }
